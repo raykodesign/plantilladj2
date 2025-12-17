@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ SILVER PROFILE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loader-overlay">
+        <div class="shutter shutter-left"></div>
+        <div class="shutter shutter-right"></div>
+        
+        <div class="loader-content" id="loader-ui">
+            <h2 class="loading-title">DJ SYSTEM</h2>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p class="loading-status" id="loading-text">CARGANDO RECURSOS...</p>
+        </div>
+    </div>
+
+    <div class="bg-video">
+        <img src="https://i.pinimg.com/originals/6c/f5/7a/6cf57a35e1163b30d3d6e8b45f0468be.gif" alt="Background">
+        <div class="overlay-tint"></div>
+    </div>
+
+    <main class="container">
+        
+        <div class="profile-card glow-border">
+            
+            <div class="vinyl-section">
+                <div class="vinyl-disk">
+                    <img src="https://xatimg.com/image/X10KnjbntCYR.jpg" alt="DJ Profile" class="dj-photo">
+                    <div class="center-hole"></div>
+                    <div class="scanner-light"></div>
+                </div>
+            </div>
+
+            <div class="info-header">
+                <h1 class="glitch-text" data-text="DJ SILVER">DJ SILVER</h1>
+                <p class="sub-text">TECHNO • FUTURE • BASS</p>
+            </div>
+
+            <div class="nav-grid">
+                <button class="cyber-btn" onclick="openSection('perfil')"><i class="fa-solid fa-user-astronaut"></i> PERFIL</button>
+                <button class="cyber-btn" onclick="openSection('amigos')"><i class="fa-solid fa-users"></i> AMIGOS</button>
+                <button class="cyber-btn" onclick="openSection('galeria')"><i class="fa-solid fa-images"></i> GALERIA</button>
+                <button class="cyber-btn" onclick="openSection('mixes')"><i class="fa-solid fa-compact-disc"></i> MIXES</button>
+            </div>
+
+            <div id="perfil" class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fa-solid fa-id-card"></i> BIO DATA</h2>
+                    <span class="close-btn" onclick="closeSection('perfil')">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Ubicación: <span class="highlight">Neo Tokyo</span></p>
+                    <p>Experiencia: <span class="highlight">10 Años</span></p>
+                    <hr class="neon-line">
+                    <p class="bio-desc">Especialista en atmósferas oscuras y ritmos industriales. Creando el sonido del mañana, hoy.</p>
+                </div>
+            </div>
+
+            <div id="amigos" class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fa-solid fa-user-group"></i> CREW</h2>
+                    <span class="close-btn" onclick="closeSection('amigos')">&times;</span>
+                </div>
+                <div class="modal-body friend-list">
+                    <a href="#" class="friend-link">MC DROID <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="#" class="friend-link">LADY BASS <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="#" class="friend-link">CYBER PUNK <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="#" class="friend-link">K-OSS <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div id="galeria" class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fa-solid fa-camera"></i> VISUALS</h2>
+                    <span class="close-btn" onclick="closeSection('galeria')">&times;</span>
+                </div>
+                <div class="modal-body gallery-container">
+                    <div class="slider">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=60" class="slide active">
+                        <img src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?auto=format&fit=crop&w=500&q=60" class="slide">
+                        <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&w=500&q=60" class="slide">
+                    </div>
+                    <button class="prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+                    <button class="next-btn" onclick="changeSlide(1)">&#10095;</button>
+                </div>
+            </div>
+
+            <div id="mixes" class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fa-solid fa-music"></i> TRACKS</h2>
+                    <span class="close-btn" onclick="closeSection('mixes')">&times;</span>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="player-wrapper">
+                        <div class="track-info">
+                            <span class="track-title">Cyber Punch 2077</span>
+                            <span class="track-time">3:45</span>
+                        </div>
+                        <audio id="audio1" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+                        <div class="player-controls">
+                            <div class="waveform-bar"></div>
+                            <button class="play-btn" onclick="togglePlay('audio1', this)">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="player-wrapper">
+                        <div class="track-info">
+                            <span class="track-title">Neon Nightmares</span>
+                            <span class="track-time">4:20</span>
+                        </div>
+                        <audio id="audio2" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
+                        <div class="player-controls">
+                            <div class="waveform-bar"></div>
+                            <button class="play-btn" onclick="togglePlay('audio2', this)">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

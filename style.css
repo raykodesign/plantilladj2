@@ -1,0 +1,221 @@
+:root {
+    --primary: #e0e0e0;
+    --neon: #00f3ff;
+    --neon-hover: #ff0055;
+    --glass: rgba(15, 15, 15, 0.90);
+    --bg-dark: #000;
+}
+
+body {
+    margin: 0; padding: 0;
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--bg-dark);
+    color: var(--primary);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- FONDO --- */
+.bg-video {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+}
+.bg-video img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: blur(12px) grayscale(90%);
+    opacity: 0.5;
+}
+
+/* --- CARGA (LOADER) --- */
+#loader-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+}
+.shutter {
+    position: absolute; top: 0; width: 50%; height: 100%;
+    background: #111;
+    border-right: 2px solid var(--neon);
+    transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1);
+    z-index: 2;
+}
+.shutter-left { left: 0; }
+.shutter-right { right: 0; border-left: 2px solid var(--neon); border-right: none; }
+
+/* Animación de apertura */
+body.loaded .shutter-left { transform: translateX(-100%); }
+body.loaded .shutter-right { transform: translateX(100%); }
+body.loaded #loader-ui { opacity: 0; pointer-events: none; }
+
+.loader-content {
+    z-index: 3; text-align: center; width: 300px;
+    transition: opacity 0.5s;
+}
+.loading-title {
+    font-family: 'Orbitron'; letter-spacing: 5px; color: var(--neon);
+}
+.progress-container {
+    width: 100%; height: 4px; background: #333;
+    margin: 20px 0; border-radius: 2px; overflow: hidden;
+}
+.progress-bar {
+    width: 0%; height: 100%; background: var(--neon);
+    box-shadow: 0 0 10px var(--neon);
+    transition: width 0.2s linear;
+}
+.loading-status { font-size: 0.8rem; letter-spacing: 2px; color: #888; }
+
+/* --- TARJETA PRINCIPAL --- */
+.container { perspective: 1000px; }
+.profile-card {
+    position: relative; width: 380px; height: 600px; /* Altura fija para evitar saltos */
+    background: var(--glass);
+    border-radius: 20px; padding: 20px;
+    box-shadow: 0 0 50px rgba(0,0,0,1);
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden; text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+/* Borde Neón Animado */
+.glow-border::before {
+    content: ''; position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: conic-gradient(transparent, transparent, var(--neon));
+    animation: rotate 4s linear infinite; z-index: -2;
+}
+.glow-border::after {
+    content: ''; position: absolute; inset: 2px;
+    background: #0a0a0a; border-radius: 18px; z-index: -1;
+}
+@keyframes rotate { 100% { transform: rotate(360deg); } }
+
+/* --- EFECTO FOTO DISCO --- */
+.vinyl-disk {
+    width: 160px; height: 160px; margin: 10px auto;
+    border-radius: 50%; position: relative; overflow: hidden;
+    border: 3px solid #333;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+}
+.dj-photo { width: 100%; height: 100%; object-fit: cover; animation: spin 10s linear infinite; }
+.center-hole {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 20px; height: 20px; background: #e0e0e0; border-radius: 50%; z-index: 5;
+    border: 4px solid #000;
+}
+/* Efecto Scanner en la foto */
+.scanner-light {
+    position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+    background: rgba(0, 243, 255, 0.8);
+    box-shadow: 0 0 10px var(--neon);
+    animation: scan 3s ease-in-out infinite alternate;
+    z-index: 4; opacity: 0.7;
+}
+@keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Texto */
+.glitch-text {
+    font-family: 'Orbitron'; font-size: 2.2rem; margin: 10px 0; color: #fff;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+}
+.sub-text { color: var(--neon); letter-spacing: 4px; font-size: 0.8rem; margin-bottom: 20px; }
+
+/* Botones Principales */
+.nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+.cyber-btn {
+    background: linear-gradient(180deg, #222, #111);
+    border: 1px solid #444; color: #ccc;
+    padding: 15px; border-radius: 8px; cursor: pointer;
+    font-family: 'Orbitron'; transition: 0.3s;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.cyber-btn:hover {
+    border-color: var(--neon); color: #fff;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* --- MODALES (SECCIONES) --- */
+.modal-content {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 10, 10, 0.98);
+    z-index: 20; padding: 20px; box-sizing: border-box;
+    display: flex; flex-direction: column;
+    /* Estado inicial */
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transform: scale(0.9); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Efecto al abrir */
+.modal-content.active {
+    opacity: 1; visibility: visible; pointer-events: all;
+    transform: scale(1); /* Efecto Zoom In */
+}
+
+.modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--neon); padding-bottom: 10px; margin-bottom: 20px;
+}
+.modal-header h2 { font-family: 'Orbitron'; color: var(--neon); margin: 0; }
+.close-btn { font-size: 2rem; cursor: pointer; color: #fff; transition: 0.3s; }
+.close-btn:hover { color: var(--neon-hover); transform: rotate(90deg); }
+
+/* --- ESTILOS INTERNOS DE SECCIONES --- */
+
+/* Amigos */
+.friend-list { display: flex; flex-direction: column; gap: 10px; }
+.friend-link {
+    text-decoration: none; color: #fff; background: #222;
+    padding: 15px; border-left: 3px solid #444;
+    transition: 0.3s; display: flex; justify-content: space-between;
+}
+.friend-link:hover {
+    background: #333; border-left: 3px solid var(--neon);
+    padding-left: 25px; /* Efecto movimiento */
+    color: var(--neon); text-shadow: 0 0 8px var(--neon);
+}
+
+/* Galería (Slider) */
+.gallery-container { position: relative; height: 100%; display: flex; align-items: center; justify-content: center; }
+.slider { position: relative; width: 100%; height: 250px; overflow: hidden; border-radius: 10px; border: 1px solid #444; }
+.slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0; transition: opacity 0.5s ease-in-out;
+}
+.slide.active { opacity: 1; }
+.prev-btn, .next-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,0.8); color: var(--neon); border: none;
+    padding: 10px 15px; cursor: pointer; font-size: 1.5rem; z-index: 10;
+}
+.prev-btn { left: 0; } .next-btn { right: 0; }
+.prev-btn:hover, .next-btn:hover { background: var(--neon); color: #000; }
+
+/* Reproductor de Mixes */
+.player-wrapper {
+    background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 15px;
+    border: 1px solid #333;
+}
+.track-info { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 10px; color: #ccc; }
+.track-title { font-weight: bold; }
+.player-controls { display: flex; align-items: center; gap: 10px; }
+.waveform-bar {
+    flex-grow: 1; height: 30px;
+    background: repeating-linear-gradient(90deg, #333 0px, #333 2px, transparent 2px, transparent 4px);
+    opacity: 0.5; position: relative;
+}
+/* Simulación de progreso en la onda */
+.player-wrapper.playing .waveform-bar {
+    background: repeating-linear-gradient(90deg, var(--neon) 0px, var(--neon) 2px, transparent 2px, transparent 4px);
+    opacity: 1; box-shadow: 0 0 10px var(--neon);
+}
+
+.play-btn {
+    width: 40px; height: 40px; border-radius: 50%; border: none;
+    background: #333; color: #fff; cursor: pointer; transition: 0.3s;
+    display: flex; align-items: center; justify-content: center;
+}
+.play-btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 10px var(--neon); }
